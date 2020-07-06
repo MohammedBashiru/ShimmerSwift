@@ -38,53 +38,53 @@ import UIKit
 @objc final public class ShimmeringLayer: CALayer {
 
     /// Set to `true` to start shimmer animation, and `false` to stop. Detaults to `false`.
-    public var isShimmering: Bool = false {
+    @objc public var isShimmering: Bool = false {
         didSet { if oldValue != isShimmering { updateShimmering() } }
     }
 
     /// The speed of the shimmer animation in points per second. The higher the number, the faster the animation.
     /// Defaults to 230.
-    public var shimmerSpeed: CGFloat = 230.0 {
+    @objc public var shimmerSpeed: CGFloat = 230.0 {
         didSet { if oldValue != shimmerSpeed { updateShimmering() } }
     }
 
     /// The highlight length of the shimmer. Range of [0,1], defaults to 1.0.
-    public var shimmerHighlightLength: CGFloat = 1.0 {
+    @objc public var shimmerHighlightLength: CGFloat = 1.0 {
         didSet { if oldValue != shimmerHighlightLength { updateShimmering() } }
     }
 
     /// The direction of the shimmer animation.
     /// Defaults to `.right`, which will run the animation from left to right.
-    public var shimmerDirection: Shimmer.Direction = .right {
+    @objc public var shimmerDirection: Shimmer.Direction = .right {
         didSet { if oldValue != shimmerDirection { updateShimmering() } }
     }
 
     /// The time interval between shimmers in seconds.
     /// Defaults to 0.4.
-    public var shimmerPauseDuration: CFTimeInterval = 0.4 {
+    @objc public var shimmerPauseDuration: CFTimeInterval = 0.4 {
         didSet { if oldValue != shimmerPauseDuration { updateShimmering() } }
     }
 
     /// The opacity of the content during a shimmer. Defaults to 0.5.
-    public var shimmerAnimationOpacity: CGFloat = 0.5 {
+    @objc public var shimmerAnimationOpacity: CGFloat = 0.5 {
         didSet { if oldValue != shimmerAnimationOpacity { updateMaskColors() } }
     }
 
     /// The opacity of the content when not shimmering. Defaults to 1.0.
-    public var shimmerOpacity: CGFloat = 1.0 {
+    @objc public var shimmerOpacity: CGFloat = 1.0 {
         didSet { if oldValue != shimmerOpacity { updateMaskColors() } }
     }
 
     /// The absolute CoreAnimation media time when the shimmer will begin.
-    public var shimmerBeginTime: CFTimeInterval = .greatestFiniteMagnitude {
+    @objc public var shimmerBeginTime: CFTimeInterval = .greatestFiniteMagnitude {
         didSet { if oldValue != shimmerBeginTime { updateShimmering() } }
     }
 
     /// The duration of the fade used when the shimmer begins. Defaults to 0.1.
-    public var shimmerBeginFadeDuration: CFTimeInterval = 0.1
+    @objc public var shimmerBeginFadeDuration: CFTimeInterval = 0.1
 
     /// The duration of the fade used when the shimmer ends. Defaults to 0.3.
-    public var shimmerEndFadeDuration: CFTimeInterval = 0.3
+    @objc public var shimmerEndFadeDuration: CFTimeInterval = 0.3
 
     /// The absolute CoreAnimation media time when the shimmer will fade in.
     public var shimmerFadeTime: CFTimeInterval?
@@ -129,7 +129,7 @@ import UIKit
         }
     }
 
-    private func clearMask() {
+    @objc private func clearMask() {
         if maskLayer == nil { return }
 
         let disableActions = CATransaction.disableActions()
@@ -140,7 +140,7 @@ import UIKit
         CATransaction.setDisableActions(disableActions)
     }
 
-    private func createMaskIfNeeded() {
+    @objc private func createMaskIfNeeded() {
         if isShimmering && maskLayer == nil {
             maskLayer = ShimmeringMaskLayer()
             maskLayer?.delegate = self
@@ -150,14 +150,14 @@ import UIKit
         }
     }
 
-    func updateMaskColors() {
+    @objc func updateMaskColors() {
         guard maskLayer != nil else { return }
         let maskedColor = UIColor(white: 1.0, alpha: shimmerOpacity)
         let unmaskedColor = UIColor(white: 1.0, alpha: shimmerAnimationOpacity)
         maskLayer?.colors = [maskedColor.cgColor, unmaskedColor.cgColor, maskedColor.cgColor]
     }
 
-    private func updateMaskLayout() {
+    @objc private func updateMaskLayout() {
         guard let content = contentLayer else { return }
 
         var length: CGFloat = 0.0
@@ -195,7 +195,7 @@ import UIKit
         }
     }
 
-    func updateShimmering() {
+    @objc func updateShimmering() {
         createMaskIfNeeded()
         guard let maskLayer = maskLayer else { return }
         layoutIfNeeded()
