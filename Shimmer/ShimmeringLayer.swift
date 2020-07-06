@@ -35,7 +35,7 @@ import QuartzCore
 #if canImport(UIKit)
 import UIKit
 
-final public class ShimmeringLayer: CALayer {
+@objc final public class ShimmeringLayer: CALayer {
 
     /// Set to `true` to start shimmer animation, and `false` to stop. Detaults to `false`.
     public var isShimmering: Bool = false {

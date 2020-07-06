@@ -36,7 +36,7 @@ import UIKit
 
 final public class Shimmer {
 
-    public enum Direction {
+    @objc public enum Direction: Int {
         case right
         case left
         case up
