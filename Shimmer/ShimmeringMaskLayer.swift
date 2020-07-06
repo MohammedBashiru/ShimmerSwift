@@ -34,7 +34,7 @@ import QuartzCore
 #if canImport(UIKit)
 import UIKit
 
-final class ShimmeringMaskLayer: CAGradientLayer {
+@objc class ShimmeringMaskLayer: CAGradientLayer {
 
     let fadeLayer = CALayer()
 

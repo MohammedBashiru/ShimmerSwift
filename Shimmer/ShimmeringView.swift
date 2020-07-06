@@ -33,7 +33,7 @@ import Foundation
 #if canImport(UIKit)
 import UIKit
 
-@objc final public class ShimmeringView: UIView {
+@objc public class ShimmeringView: UIView {
 
     override public class var layerClass: Swift.AnyClass {
         return ShimmeringLayer.self

@@ -34,7 +34,7 @@ import QuartzCore
 #if canImport(UIKit)
 import UIKit
 
-final public class Shimmer {
+@objc public class Shimmer: NSObject {
 
     @objc public enum Direction: Int {
         case right
